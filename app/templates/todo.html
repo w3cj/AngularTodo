@@ -1,0 +1,50 @@
+<h1>Todo App</h1>
+<form class="form" ng-submit="$ctrl.addTodo()">
+	<div class="form-group">
+	  <label for="todo">Add a Todo</label>
+	  <input ng-model="$ctrl.newTodo.title" type="text" class="form-control" id="todo" placeholder="Walk the dog.">
+	  <p class="help-block">Enter a todo then click add.</p>
+	</div>
+	<div class="form-group">
+		<label for="todo">Priority</label>
+		<select class="form-control" ng-model="$ctrl.newTodo.priority">
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		</select>
+	</div>
+	<button
+		type="submit"
+		class="btn btn-default">
+	  Add Todo
+	</button>
+</form>
+<br>
+<section>
+	<ul class="list-group">
+	  <li
+			class="list-group-item"
+			ng-repeat="todo in $ctrl.todos | orderBy: 'title'">
+			<p
+				ng-class="{
+					done: todo.done,
+					highPriority: todo.priority < 2
+				}">
+				{{todo.title}}
+				<span class="badge">{{todo.priority}}</span>
+			</p>
+			<a
+				ng-click="$ctrl.markDone(todo)"
+				type="button"
+				class="btn btn-success text-right">
+			  Done
+			</a>
+			<a
+				ng-click="$ctrl.delete($index)"
+				type="button"
+				class="btn btn-danger text-right">
+				Delete
+			</a>
+		</li>
+	</ul>
+</section>
